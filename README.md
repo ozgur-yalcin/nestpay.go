@@ -1,5 +1,5 @@
 # Nestpay
-An easy-to-use Nestpay API (v4) with golang
+An easy-to-use Nestpay API with golang
 
 # Security
 If you discover any security related issues, please email ozguryalcin@outlook.com instead of using the issue tracker.
