@@ -14,8 +14,10 @@ func init() {
 }
 
 func main() {
-	api := nestpay.API{}
-	request := nestpay.Request{}
+	api := new(nestpay.API)
+	api.Lock()
+	defer api.Unlock()
+	request := new(nestpay.Request)
 	request.Name = config.User
 	request.Password = config.Pass
 	request.ClientId = config.Client
@@ -25,7 +27,7 @@ func main() {
 	request.IPAddress = ""                      // Müşteri IP adresi
 	request.Number = ""                         // Kart numarası
 	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
-	request.Cvv2Val = ""                        // Kart Cvv2 Kodu
+	request.Cvv2Val = "xxx"                     // Kart Cvv2 Kodu
 	request.Total = "0.00"                      // Satış tutarı
 	request.Currency = config.Currencies["TRY"] // Para birimi
 	// Fatura
