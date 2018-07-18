@@ -1,5 +1,5 @@
 # Nestpay
-Omnipay-NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, ING Bank, Citibank, Cardplus, Ziraat Bankası) API with golang
+NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, ING Bank, Citibank, Cardplus, Ziraat Bankası) Omnipay Sanalpos API with golang
 
 # Security
 If you discover any security related issues, please email ozguryalcin@outlook.com instead of using the issue tracker.
