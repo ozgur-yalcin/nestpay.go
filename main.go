@@ -7,9 +7,10 @@ import (
 )
 
 func init() {
-	config.Client = "" // Müşteri numarası
-	config.User = ""   // Kullanıcı adı
-	config.Pass = ""   // Şifre
+	config.Bank = "akbank" // Banka
+	config.Client = ""     // Müşteri numarası
+	config.User = ""       // Kullanıcı adı
+	config.Pass = ""       // Şifre
 }
 
 func main() {
@@ -20,13 +21,13 @@ func main() {
 	request.ClientId = config.Client
 	// Ödeme
 	request.Type = "Auth"
-	request.Mode = "P"
-	request.IPAddress = ""    // Müşteri IP adresi
-	request.Number = ""       // Kart numarası
-	request.Expires = "xx/xx" // Kart son kullanma tarihi
-	request.Cvv2Val = ""      // Kart Cvv2 Kodu
-	request.Total = "0.00"    // Satış tutarı
-	request.Currency = "949"  // Para birimi (949 : TRY)
+	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
+	request.IPAddress = ""                      // Müşteri IP adresi
+	request.Number = ""                         // Kart numarası
+	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
+	request.Cvv2Val = ""                        // Kart Cvv2 Kodu
+	request.Total = "0.00"                      // Satış tutarı
+	request.Currency = config.Currencies["TRY"] // Para birimi
 	// Fatura
 	request.BillTo.Name = ""    // Kart sahibi
 	request.BillTo.Company = "" // Fatura unvanı

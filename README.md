@@ -1,5 +1,5 @@
 # Nestpay
-An easy-to-use Nestpay API with golang
+Omnipay-NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, ING Bank, Citibank, Cardplus, Ziraat Bankası) API with golang
 
 # Security
 If you discover any security related issues, please email ozguryalcin@outlook.com instead of using the issue tracker.
@@ -19,9 +19,10 @@ import (
 )
 
 func init() {
-	config.Client = "" // Müşteri numarası
-	config.User = ""   // Kullanıcı adı
-	config.Pass = ""   // Şifre
+	config.Bank = "akbank" // Banka
+	config.Client = ""     // Müşteri numarası
+	config.User = ""       // Kullanıcı adı
+	config.Pass = ""       // Şifre
 }
 
 func main() {
@@ -32,13 +33,13 @@ func main() {
 	request.ClientId = config.Client
 	// Ödeme
 	request.Type = "Auth"
-	request.Mode = "P"
-	request.IPAddress = ""    // Müşteri IP adresi
-	request.Number = ""       // Kart numarası
-	request.Expires = "xx/xx" // Kart son kullanma tarihi
-	request.Cvv2Val = ""   // Kart Cvv2 Kodu
-	request.Total = "0.00"    // Satış tutarı
-	request.Currency = "949"  // Para birimi (949 : TRY)
+	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
+	request.IPAddress = ""                      // Müşteri IP adresi
+	request.Number = ""                         // Kart numarası
+	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
+	request.Cvv2Val = ""                        // Kart Cvv2 Kodu
+	request.Total = "0.00"                      // Satış tutarı
+	request.Currency = config.Currencies["TRY"] // Para birimi
 	// Fatura
 	request.BillTo.Name = ""    // Kart sahibi
 	request.BillTo.Company = "" // Fatura unvanı
@@ -71,9 +72,10 @@ import (
 )
 
 func init() {
-	config.Client = "" // Müşteri numarası
-	config.User = ""   // Kullanıcı adı
-	config.Pass = ""   // Şifre
+	config.Bank = "akbank" // Banka
+	config.Client = ""     // Müşteri numarası
+	config.User = ""       // Kullanıcı adı
+	config.Pass = ""       // Şifre
 }
 
 func main() {
@@ -84,10 +86,13 @@ func main() {
 	request.ClientId = config.Client
 	// İade
 	request.Type = "Credit"
-	request.Mode = "P"
-	request.OrderId = ""     // Sipariş numarası
-	request.Total = "0.00"   // İade tutarı
-	request.Currency = "949" // Para birimi (949 : TRY)
+	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
+	request.IPAddress = ""                      // Müşteri IP adresi
+	request.Number = ""                         // Kart numarası
+	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
+	request.Cvv2Val = ""                        // Kart Cvv2 Kodu
+	request.Total = "0.00"                      // Satış tutarı
+	request.Currency = config.Currencies["TRY"] // Para birimi
 	response := api.Transaction(request)
 	if response.ProcReturnCode != "00" {
 		if response.ErrMsg == "" {
