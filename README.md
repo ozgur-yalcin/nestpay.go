@@ -26,8 +26,10 @@ func init() {
 }
 
 func main() {
-	api := nestpay.API{}
-	request := nestpay.Request{}
+	api := new(nestpay.API)
+	api.Lock()
+	defer api.Unlock()
+	request := new(nestpay.Request)
 	request.Name = config.User
 	request.Password = config.Pass
 	request.ClientId = config.Client
@@ -79,8 +81,10 @@ func init() {
 }
 
 func main() {
-	api := nestpay.API{}
-	request := nestpay.Request{}
+	api := new(nestpay.API)
+	api.Lock()
+	defer api.Unlock()
+	request := new(nestpay.Request)
 	request.Name = config.User
 	request.Password = config.Pass
 	request.ClientId = config.Client
