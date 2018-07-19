@@ -90,9 +90,9 @@ func main() {
 	request.ClientId = config.Client
 	// İade
 	request.Type = "Credit"
-	request.Mode = "P"
-	request.OrderId = ""    					// Sipariş numarası
-	request.Total = "0.00"   					// İade tutarı
+	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
+	request.OrderId = ""                        // Sipariş numarası
+	request.Total = "0.00"                      // İade tutarı
 	request.Currency = config.Currencies["TRY"] // Para birimi
 	response := api.Transaction(request)
 	if response.ProcReturnCode != "00" {
