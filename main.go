@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"nestpay/config"
-	"nestpay/src"
+
+	"github.com/OzqurYalcin/nestpay/config"
+	"github.com/OzqurYalcin/nestpay/src"
 )
 
 func init() {

@@ -3,11 +3,11 @@ package nestpay
 import (
 	"encoding/xml"
 	"fmt"
-	"nestpay/config"
 	"net/http"
 	"strings"
 	"sync"
 
+	"github.com/OzqurYalcin/nestpay/config"
 	"golang.org/x/net/html/charset"
 )
 

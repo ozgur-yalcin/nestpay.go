@@ -7,6 +7,10 @@ If you discover any security related issues, please email ozguryalcin@outlook.co
 # License
 The MIT License (MIT). Please see License File for more information.
 
+# Installation
+```bash
+go get github.com/OzqurYalcin/nestpay
+```
 
 # Akbank sanalpos satış işlemi
 ```go
@@ -14,8 +18,9 @@ package main
 
 import (
 	"fmt"
-	"nestpay/config"
-	"nestpay/src"
+
+	"github.com/OzqurYalcin/nestpay/config"
+	"github.com/OzqurYalcin/nestpay/src"
 )
 
 func init() {
@@ -69,8 +74,9 @@ package main
 
 import (
 	"fmt"
-	"nestpay/config"
-	"nestpay/src"
+
+	"github.com/OzqurYalcin/nestpay/config"
+	"github.com/OzqurYalcin/nestpay/src"
 )
 
 func init() {
