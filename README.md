@@ -67,7 +67,6 @@ func main() {
 }
 ```
 
-
 # Akbank sanalpos iade işlemi
 ```go
 package main
