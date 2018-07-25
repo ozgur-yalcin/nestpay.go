@@ -2,9 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.10.3      
-    working_directory: /go/src/github.com/OzqurYalcin/parasut
+      - image: circleci/golang:1.10.3
+    working_directory: /go/src/github.com/OzqurYalcin/nestpay
     steps:
       - checkout
       - run: go get -v -t -d ./...
-      - run: go test -v ./...
+      - run: go test -v -race ./...
