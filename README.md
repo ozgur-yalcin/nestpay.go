@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/OzqurYalcin/nestpay.svg?branch=master)](https://travis-ci.org/OzqurYalcin/nestpay)
+
 # Nestpay
 NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, Hsbc, Ziraat Bankası) Omnipay Sanalpos API with golang
 
