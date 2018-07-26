@@ -3,9 +3,6 @@
 # Nestpay
 NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, Hsbc, Ziraat Bankası) Omnipay Sanal POS API with golang
 
-# Security
-If you discover any security related issues, please email ozguryalcin@outlook.com instead of using the issue tracker.
-
 # License
 The MIT License (MIT). Please see License File for more information.
 
