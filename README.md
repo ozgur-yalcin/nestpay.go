@@ -1,10 +1,7 @@
-[![Linux Build Status](https://travis-ci.org/OzqurYalcin/nestpay.svg?branch=master)](https://travis-ci.org/OzqurYalcin/nestpay) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/q7ugwfufg8o55fj4?svg=true)](https://ci.appveyor.com/project/OzqurYalcin/nestpay) [![Build Status](https://circleci.com/gh/OzqurYalcin/nestpay.svg?style=svg)](https://circleci.com/gh/OzqurYalcin/nestpay)
+[![Linux Build Status](https://travis-ci.org/OzqurYalcin/nestpay.svg?branch=master)](https://travis-ci.org/OzqurYalcin/nestpay) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/q7ugwfufg8o55fj4?svg=true)](https://ci.appveyor.com/project/OzqurYalcin/nestpay) [![Build Status](https://circleci.com/gh/OzqurYalcin/nestpay.svg?style=svg)](https://circleci.com/gh/OzqurYalcin/nestpay) [![license](https://img.shields.io/npm/l/express.svg)](https://github.com/OzqurYalcin/nestpay/blob/master/LICENSE.md)
 
 # Nestpay
 NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, Hsbc, Ziraat Bankası) Omnipay Sanal POS API with golang
-
-# License
-The MIT License (MIT). Please see License File for more information.
 
 # Installation
 ```bash
