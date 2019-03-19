@@ -20,7 +20,7 @@ import (
 
 func main() {
 	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
-	request := new(nestpay.Request)
+	request := &nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
 	request.Password = "" // Şifre
@@ -65,7 +65,7 @@ import (
 
 func main() {
 	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
-	request := new(nestpay.Request)
+	request := &nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
 	request.Password = "" // Şifre
