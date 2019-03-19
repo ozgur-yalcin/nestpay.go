@@ -3,34 +3,24 @@ package main
 import (
 	"fmt"
 
-	"github.com/OzqurYalcin/nestpay/config"
-	"github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/OzqurYalcin/nestpay/src"
 )
 
-func init() {
-	config.Bank = "akbank" // Banka
-	config.Client = ""     // Müşteri numarası
-	config.User = ""       // Kullanıcı adı
-	config.Pass = ""       // Şifre
-}
-
 func main() {
-	api := new(nestpay.API)
-	api.Lock()
-	defer api.Unlock()
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := new(nestpay.Request)
-	request.Name = config.User
-	request.Password = config.Pass
-	request.ClientId = config.Client
+	request.ClientId = "" // Müşteri No
+	request.Username = "" // Kullanıcı adı
+	request.Password = "" // Şifre
 	// Ödeme
 	request.Type = "Auth"
-	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
-	request.IPAddress = ""                      // Müşteri IP adresi
-	request.Number = ""                         // Kart numarası
-	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
-	request.Cvv2Val = "xxx"                     // Kart Cvv2 Kodu
-	request.Total = "0.00"                      // Satış tutarı
-	request.Currency = config.Currencies["TRY"] // Para birimi
+	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
+	request.IPAddress = ""                       // Müşteri IP adresi
+	request.Number = ""                          // Kart numarası
+	request.Expires = "xx/xx"                    // Kart son kullanma tarihi
+	request.Cvv2Val = "xxx"                      // Kart Cvv2 Kodu
+	request.Total = "0.00"                       // Satış tutarı
+	request.Currency = nestpay.Currencies["TRY"] // Para birimi
 	// Fatura
 	request.BillTo.Name = ""    // Kart sahibi
 	request.BillTo.Company = "" // Fatura unvanı

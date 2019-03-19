@@ -5,19 +5,41 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	"sync"
 
-	"github.com/OzqurYalcin/nestpay/config"
 	"golang.org/x/net/html/charset"
 )
 
+var EndPoints map[string]string = map[string]string{
+	"asseco":      "https://entegrasyon.asseco-see.com.tr/fim/api",
+	"akbank":      "https://www.sanalakpos.com/fim/api",
+	"isbank":      "https://spos.isbank.com.tr/fim/api",
+	"finansbank":  "https://www.fbwebpos.com/fim/api",
+	"denizbank":   "https://denizbank.est.com.tr/fim/api",
+	"kuveytturk":  "https://kuveytturk.est.com.tr/fim/api",
+	"halkbank":    "https://sanalpos.halkbank.com.tr/fim/api",
+	"anadolubank": "https://anadolusanalpos.est.com.tr/fim/api",
+	"hsbc":        "https://vpos.advantage.com.tr/fim/api",
+	"ziraatbank":  "https://sanalpos2.ziraatbank.com.tr/fim/api",
+}
+
+var Currencies map[string]string = map[string]string{
+	"TRY": "949",
+	"YTL": "949",
+	"TRL": "949",
+	"TL":  "949",
+	"USD": "840",
+	"EUR": "978",
+	"GBP": "826",
+	"JPY": "392",
+}
+
 type API struct {
-	sync.Mutex
+	Bank string
 }
 
 type Request struct {
 	XMLName    xml.Name    `xml:"CC5Request,omitempty"`
-	Name       interface{} `xml:"Name,omitempty"`
+	Username   interface{} `xml:"Name,omitempty"`
 	Password   interface{} `xml:"Password,omitempty"`
 	ClientId   interface{} `xml:"ClientId,omitempty"`
 	OrderId    interface{} `xml:"OrderId,omitempty"`
@@ -203,7 +225,7 @@ type Response struct {
 func (api *API) Transaction(request *Request) (response *Response) {
 	response = new(Response)
 	postdata, _ := xml.Marshal(request)
-	res, err := http.Post(config.EndPoints[config.Bank], "text/xml; charset=utf-8", strings.NewReader(strings.ToLower(xml.Header)+string(postdata)))
+	res, err := http.Post(EndPoints[api.Bank], "text/xml; charset=utf-8", strings.NewReader(strings.ToLower(xml.Header)+string(postdata)))
 	if err != nil {
 		log.Println(err)
 		return response

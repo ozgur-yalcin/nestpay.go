@@ -15,25 +15,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/OzqurYalcin/nestpay/config"
-	"github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/OzqurYalcin/nestpay/src"
 )
 
-func init() {
-	config.Bank = "akbank" // Banka
-	config.Client = ""     // Müşteri numarası
-	config.User = ""       // Kullanıcı adı
-	config.Pass = ""       // Şifre
-}
-
 func main() {
-	api := new(nestpay.API)
-	api.Lock()
-	defer api.Unlock()
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := new(nestpay.Request)
-	request.Name = config.User
-	request.Password = config.Pass
-	request.ClientId = config.Client
+	request.ClientId = "" // Müşteri No
+	request.Username = "" // Kullanıcı adı
+	request.Password = "" // Şifre
 	// Ödeme
 	request.Type = "Auth"
 	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
@@ -42,7 +32,7 @@ func main() {
 	request.Expires = "xx/xx"                   // Kart son kullanma tarihi
 	request.Cvv2Val = "xxx"                     // Kart Cvv2 Kodu
 	request.Total = "0.00"                      // Satış tutarı
-	request.Currency = config.Currencies["TRY"] // Para birimi
+	request.Currency = nestpay.Currencies["TRY"] // Para birimi
 	// Fatura
 	request.BillTo.Name = ""    // Kart sahibi
 	request.BillTo.Company = "" // Fatura unvanı
@@ -70,31 +60,21 @@ package main
 import (
 	"fmt"
 
-	"github.com/OzqurYalcin/nestpay/config"
-	"github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/OzqurYalcin/nestpay/src"
 )
 
-func init() {
-	config.Bank = "akbank" // Banka
-	config.Client = ""     // Müşteri numarası
-	config.User = ""       // Kullanıcı adı
-	config.Pass = ""       // Şifre
-}
-
 func main() {
-	api := new(nestpay.API)
-	api.Lock()
-	defer api.Unlock()
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := new(nestpay.Request)
-	request.Name = config.User
-	request.Password = config.Pass
-	request.ClientId = config.Client
+	request.ClientId = "" // Müşteri No
+	request.Username = "" // Kullanıcı adı
+	request.Password = "" // Şifre
 	// İade
 	request.Type = "Credit"
-	request.Mode = "P"                          // TEST : "T" - PRODUCTION "P"
-	request.OrderId = ""                        // Sipariş numarası
-	request.Total = "0.00"                      // İade tutarı
-	request.Currency = config.Currencies["TRY"] // Para birimi
+	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
+	request.OrderId = "ORDER-"                   // Sipariş numarası
+	request.Total = "0.00"                       // İade tutarı
+	request.Currency = nestpay.Currencies["TRY"] // Para birimi
 	response := api.Transaction(request)
 	if response.ProcReturnCode != "00" {
 		if response.ErrMsg == "" {
