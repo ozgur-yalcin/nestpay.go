@@ -15,6 +15,7 @@
 <div><input type="text" name="cv2" placeholder="xxx" style="width:55px;text-align:center;" maxlength="3"></div>
 <div style="margin-top:4px;"><input type="submit" value="Öde"></div>
 <input type="hidden" name="clientid" id="clientid" value="Müşteri No">
+<input type="hidden" name="islemtipi" id="islemtipi" value="Auth">
 <input type="hidden" name="storetype" id="storetype" value="3d">
 <input type="hidden" name="amount" id="amount" value="0.00">
 <input type="hidden" name="currency" id="currency" value="949">
@@ -29,7 +30,7 @@
 // bu kısım test etmek için yazılmıştır. buradaki işlem backend tarafında yapılmalıdır !
 var storekey = "123456";
 document.getElementById("rnd").value = Math.random();
-var hashstr = document.getElementById("clientid").value + document.getElementById("oid").value + document.getElementById("amount").value + document.getElementById("okUrl").value + document.getElementById("failUrl").value + document.getElementById("rnd").value + storekey;
+var hashstr = document.getElementById("clientid").value + document.getElementById("oid").value + document.getElementById("amount").value + document.getElementById("okUrl").value + document.getElementById("failUrl").value + document.getElementById("islemtipi").value + document.getElementById("rnd").value + storekey;
 document.getElementById("hash").value = CryptoJS.SHA1(hashstr).toString(CryptoJS.enc.Base64);
 </script>
 </body>
