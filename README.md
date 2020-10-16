@@ -1,5 +1,5 @@
 [![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/OzqurYalcin/nestpay/blob/master/LICENSE.md)
-[![documentation](https://godoc.org/github.com/OzqurYalcin/nestpay?status.svg)](https://pkg.go.dev/github.com/OzqurYalcin/nestpay/src)
+[![documentation](https://pkg.go.dev/badge/github.com/OzqurYalcin/nestpay)](https://pkg.go.dev/github.com/OzqurYalcin/nestpay/src)
 
 # Nestpay
 NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, Hsbc, Ziraat Bankası) Omnipay Sanal POS API with golang
