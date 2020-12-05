@@ -97,12 +97,10 @@ func main() {
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
 	request.Password = "" // Şifre
-	// İade
+	// İptal
 	request.Type = "Void"
-	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
-	request.OrderId = "ORDER-"                   // Sipariş numarası
-	request.Total = "0.00"                       // İade tutarı
-	request.Currency = nestpay.Currencies["TRY"] // Para birimi
+	request.Mode = "P"         // TEST : "T" - PRODUCTION "P"
+	request.OrderId = "ORDER-" // Sipariş numarası
 	response := api.Transaction(request)
 	pretty, _ := xml.MarshalIndent(response, " ", " ")
 	fmt.Println(string(pretty))
