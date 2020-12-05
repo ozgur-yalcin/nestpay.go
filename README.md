@@ -29,16 +29,17 @@ func main() {
 	// Ödeme
 	request.Type = "Auth"
 	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
-	request.IPAddress = ""                       // Müşteri IP adresi
-	request.Number = ""                          // Kart numarası
-	request.Expires = "xx/xx"                    // Kart son kullanma tarihi
-	request.Cvv2Val = "xxx"                      // Kart Cvv2 Kodu
-	request.Total = "0.00"                       // Satış tutarı
-	request.Instalment = "0"                     // Taksit sayısı
+	request.IPAddress = "1.2.3.4"                // Müşteri IP adresi (zorunlu)
+	request.Number = "4242424242424242"          // Kart numarası
+	request.Expires = "02/20"                    // Son kullanma tarihi (Ay ve Yılın son 2 hanesi) MM/YY
+	request.Cvv2Val = "123"                      // Cvv2 Kodu (kartın arka yüzündeki 3 haneli numara)
+	request.Total = "1.00"                       // Satış tutarı
+	request.Instalment = ""                      // Taksit sayısı
 	request.Currency = nestpay.Currencies["TRY"] // Para birimi
 	// Fatura
-	request.BillTo.Name = ""    // Kart sahibi
-	request.BillTo.Company = "" // Fatura unvanı
+	request.BillTo.Name = ""     // Kart sahibi
+	request.BillTo.Company = ""  // Fatura unvanı
+	request.BillTo.TelVoice = "" // Telefon numarası
 	// 3D (varsa)
 	//request.PayerTxnId = ""
 	//request.PayerSecurityLevel = ""
