@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
-	request := &nestpay.Request{}
+	api := nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
+	request := nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
 	request.Password = "" // Şifre
@@ -20,15 +20,16 @@ func main() {
 	request.Expires = "xx/xx"                    // Kart son kullanma tarihi
 	request.Cvv2Val = "xxx"                      // Kart Cvv2 Kodu
 	request.Total = "0.00"                       // Satış tutarı
+	request.Instalment = ""                      // Taksit sayısı
 	request.Currency = nestpay.Currencies["TRY"] // Para birimi
 	// Fatura
 	request.BillTo.Name = ""    // Kart sahibi
 	request.BillTo.Company = "" // Fatura unvanı
 	// 3D (varsa)
-	request.PayerTxnId = nil
-	request.PayerSecurityLevel = nil
-	request.PayerAuthenticationCode = nil
-	request.CardholderPresentCode = nil
+	request.PayerTxnId = ""
+	request.PayerSecurityLevel = ""
+	request.PayerAuthenticationCode = ""
+	request.CardholderPresentCode = ""
 	response := api.Transaction(request)
 	if response.ProcReturnCode != "00" {
 		if response.ErrMsg == "" {
