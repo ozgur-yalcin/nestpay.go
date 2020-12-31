@@ -21,7 +21,7 @@ import (
 )
 
 func main() {
-	api := nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
@@ -63,7 +63,7 @@ import (
 )
 
 func main() {
-	api := nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
@@ -92,7 +92,7 @@ import (
 )
 
 func main() {
-	api := nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
+	api := &nestpay.API{"akbank"} // "akbank","asseco","isbank","finansbank","denizbank","kuveytturk","halkbank","anadolubank","hsbc","ziraatbank"
 	request := nestpay.Request{}
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı

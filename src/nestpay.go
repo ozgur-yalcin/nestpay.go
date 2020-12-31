@@ -123,7 +123,7 @@ type Response struct {
 	ErrMsg         string   `xml:"ErrMsg,omitempty"`
 }
 
-func (api API) Transaction(request Request) (response Response) {
+func (api *API) Transaction(request Request) (response Response) {
 	postdata, _ := xml.Marshal(request)
 	res, err := http.Post(EndPoints[api.Bank], "text/xml; charset=utf-8", strings.NewReader(xml.Header+string(postdata)))
 	if err != nil {
