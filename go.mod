@@ -1,3 +1,3 @@
-module github.com/OzqurYalcin/nestpay
+module github.com/ozgur-soft/nestpay
 
 go 1.15

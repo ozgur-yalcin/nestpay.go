@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay/src"
 )
 
 func main() {

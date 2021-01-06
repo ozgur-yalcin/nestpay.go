@@ -1,12 +1,12 @@
-[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/OzqurYalcin/nestpay/blob/master/LICENSE.md)
-[![documentation](https://pkg.go.dev/badge/github.com/OzqurYalcin/nestpay)](https://pkg.go.dev/github.com/OzqurYalcin/nestpay/src)
+[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-soft/nestpay/blob/master/LICENSE.md)
+[![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay)](https://pkg.go.dev/github.com/ozgur-soft/nestpay/src)
 
 # Nestpay
 NestPay (EST) (Akbank, İş Bankası, Finansbank, Denizbank, Kuveytturk, Halkbank, Anadolubank, Hsbc, Ziraat Bankası) Omnipay Sanal POS API with golang
 
 # Installation
 ```bash
-go get github.com/OzqurYalcin/nestpay
+go get github.com/ozgur-soft/nestpay
 ```
 
 # Akbank sanalpos satış işlemi
@@ -17,7 +17,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay/src"
 )
 
 func main() {
@@ -59,7 +59,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay/src"
 )
 
 func main() {
@@ -88,7 +88,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/OzqurYalcin/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay/src"
 )
 
 func main() {
