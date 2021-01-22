@@ -31,7 +31,7 @@ func main() {
 	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
 	request.IPAddress = "1.2.3.4"                // Müşteri IP adresi (zorunlu)
 	request.Number = "4242424242424242"          // Kart numarası
-	request.Expires = "02/20"                    // Son kullanma tarihi (Ay ve Yılın son 2 hanesi) MM/YY
+	request.Expires = "02/20"                    // Son kullanma tarihi (Ay ve Yılın son 2 hanesi) AA/YY
 	request.Cvv2Val = "000"                      // Cvv2 Kodu (kartın arka yüzündeki 3 haneli numara)
 	request.Total = "1.00"                       // Satış tutarı
 	request.Instalment = ""                      // Taksit sayısı
