@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","anadolubank","finansbank"
+	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	request := new(nestpay.Request)
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı

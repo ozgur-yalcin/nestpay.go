@@ -2,7 +2,7 @@
 [![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay)](https://pkg.go.dev/github.com/ozgur-soft/nestpay/src)
 
 # Nestpay
-NestPay (EST) (Akbank, İş Bankası, Ziraat Bankası, Halkbank, Anadolubank, Finansbank) Sanal POS API with golang
+NestPay (EST) (Asseco, Akbank, İş Bankası, Ziraat Bankası, Halkbank, Finansbank, TEB) Sanal POS API with golang
 
 # Installation
 ```bash
@@ -21,7 +21,7 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","anadolubank","finansbank"
+	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	request := new(nestpay.Request)
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
@@ -63,7 +63,7 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","anadolubank","finansbank"
+	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	request := new(nestpay.Request)
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
@@ -92,7 +92,7 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","anadolubank","finansbank"
+	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	request := new(nestpay.Request)
 	request.ClientId = "" // Müşteri No
 	request.Username = "" // Kullanıcı adı
