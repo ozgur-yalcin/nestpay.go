@@ -2,7 +2,7 @@
 [![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay)](https://pkg.go.dev/github.com/ozgur-soft/nestpay/src)
 
 # Nestpay
-NestPay (EST) (Akbank, İş Bankası, Halkbank, Anadolubank, Ziraat Bankası) Sanal POS API with golang
+NestPay (EST) (Akbank, İş Bankası, Ziraat Bankası, Halkbank, Anadolubank, Finansbank) Sanal POS API with golang
 
 # Installation
 ```bash
