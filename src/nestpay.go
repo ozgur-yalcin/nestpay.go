@@ -11,12 +11,8 @@ var EndPoints map[string]string = map[string]string{
 	"asseco":      "https://entegrasyon.asseco-see.com.tr/fim/api",
 	"akbank":      "https://www.sanalakpos.com/fim/api",
 	"isbank":      "https://spos.isbank.com.tr/fim/api",
-	"finansbank":  "https://www.fbwebpos.com/fim/api",
-	"denizbank":   "https://denizbank.est.com.tr/fim/api",
-	"kuveytturk":  "https://kuveytturk.est.com.tr/fim/api",
 	"halkbank":    "https://sanalpos.halkbank.com.tr/fim/api",
 	"anadolubank": "https://anadolusanalpos.est.com.tr/fim/api",
-	"hsbc":        "https://vpos.advantage.com.tr/fim/api",
 	"ziraatbank":  "https://sanalpos2.ziraatbank.com.tr/fim/api",
 }
 
@@ -36,79 +32,73 @@ type API struct {
 }
 
 type Request struct {
-	XMLName    xml.Name `xml:"CC5Request,omitempty"`
-	Username   string   `xml:"Name,omitempty"`
-	Password   string   `xml:"Password,omitempty"`
-	ClientId   string   `xml:"ClientId,omitempty"`
-	OrderId    string   `xml:"OrderId,omitempty"`
-	GroupId    string   `xml:"GroupId,omitempty"`
-	TransId    string   `xml:"TransId,omitempty"`
-	UserId     string   `xml:"UserId,omitempty"`
-	IPAddress  string   `xml:"IPAddress,omitempty"`
-	Email      string   `xml:"Email,omitempty"`
-	Mode       string   `xml:"Mode,omitempty"`
-	Type       string   `xml:"Type,omitempty"`
-	Number     string   `xml:"Number,omitempty"`
-	Expires    string   `xml:"Expires,omitempty"`
-	Cvv2Val    string   `xml:"Cvv2Val,omitempty"`
-	Total      string   `xml:"Total,omitempty"`
-	Currency   string   `xml:"Currency,omitempty"`
-	Instalment string   `xml:"Instalment,omitempty"`
+	XMLName    xml.Name    `xml:"CC5Request,omitempty"`
+	Username   interface{} `xml:"Name,omitempty"`
+	Password   interface{} `xml:"Password,omitempty"`
+	ClientId   interface{} `xml:"ClientId,omitempty"`
+	OrderId    interface{} `xml:"OrderId,omitempty"`
+	GroupId    interface{} `xml:"GroupId,omitempty"`
+	TransId    interface{} `xml:"TransId,omitempty"`
+	UserId     interface{} `xml:"UserId,omitempty"`
+	IPAddress  interface{} `xml:"IPAddress,omitempty"`
+	Email      interface{} `xml:"Email,omitempty"`
+	Mode       interface{} `xml:"Mode,omitempty"`
+	Type       interface{} `xml:"Type,omitempty"`
+	Number     interface{} `xml:"Number,omitempty"`
+	Expires    interface{} `xml:"Expires,omitempty"`
+	Cvv2Val    interface{} `xml:"Cvv2Val,omitempty"`
+	Total      interface{} `xml:"Total,omitempty"`
+	Currency   interface{} `xml:"Currency,omitempty"`
+	Instalment interface{} `xml:"Instalment,omitempty"`
 
-	PayerTxnId              string `xml:"PayerTxnId,omitempty"`
-	PayerSecurityLevel      string `xml:"PayerSecurityLevel,omitempty"`
-	PayerAuthenticationCode string `xml:"PayerAuthenticationCode,omitempty"`
-	CardholderPresentCode   string `xml:"CardholderPresentCode,omitempty"`
+	PayerTxnId              interface{} `xml:"PayerTxnId,omitempty"`
+	PayerSecurityLevel      interface{} `xml:"PayerSecurityLevel,omitempty"`
+	PayerAuthenticationCode interface{} `xml:"PayerAuthenticationCode,omitempty"`
+	CardholderPresentCode   interface{} `xml:"CardholderPresentCode,omitempty"`
 
-	BillTo struct {
-		Name       string `xml:"Name,omitempty"`
-		Company    string `xml:"Company,omitempty"`
-		Street1    string `xml:"Street1,omitempty"`
-		Street2    string `xml:"Street2,omitempty"`
-		Street3    string `xml:"Street3,omitempty"`
-		City       string `xml:"City,omitempty"`
-		StateProv  string `xml:"StateProv,omitempty"`
-		PostalCode string `xml:"PostalCode,omitempty"`
-		Country    string `xml:"Country,omitempty"`
-		TelVoice   string `xml:"TelVoice,omitempty"`
-	} `xml:"BillTo,omitempty"`
+	BillTo        *To       `xml:"BillTo,omitempty"`
+	ShipTo        *To       `xml:"ShipTo,omitempty"`
+	PbOrder       *Pb       `xml:"PbOrder,omitempty"`
+	OrderItemList *ItemList `xml:"OrderItemList,omitempty"`
 
-	ShipTo struct {
-		Name       string `xml:"Name,omitempty"`
-		Company    string `xml:"Company,omitempty"`
-		Street1    string `xml:"Street1,omitempty"`
-		Street2    string `xml:"Street2,omitempty"`
-		Street3    string `xml:"Street3,omitempty"`
-		City       string `xml:"City,omitempty"`
-		StateProv  string `xml:"StateProv,omitempty"`
-		PostalCode string `xml:"PostalCode,omitempty"`
-		Country    string `xml:"Country,omitempty"`
-		TelVoice   string `xml:"TelVoice,omitempty"`
-	} `xml:"ShipTo,omitempty"`
+	VersionInfo interface{} `xml:"VersionInfo,omitempty"`
+}
 
-	OrderItemList struct {
-		OrderItem []struct {
-			Id          string `xml:"Id,omitempty"`
-			ItemNumber  string `xml:"ItemNumber,omitempty"`
-			ProductCode string `xml:"ProductCode,omitempty"`
-			Qty         string `xml:"Qty,omitempty"`
-			Desc        string `xml:"Desc,omitempty"`
-			Price       string `xml:"Price,omitempty"`
-			Total       string `xml:"Total,omitempty"`
-		} `xml:"OrderItem,omitempty"`
-	} `xml:"OrderItemList,omitempty"`
+type To struct {
+	Name       interface{} `xml:"Name,omitempty"`
+	Company    interface{} `xml:"Company,omitempty"`
+	Street1    interface{} `xml:"Street1,omitempty"`
+	Street2    interface{} `xml:"Street2,omitempty"`
+	Street3    interface{} `xml:"Street3,omitempty"`
+	City       interface{} `xml:"City,omitempty"`
+	StateProv  interface{} `xml:"StateProv,omitempty"`
+	PostalCode interface{} `xml:"PostalCode,omitempty"`
+	Country    interface{} `xml:"Country,omitempty"`
+	TelVoice   interface{} `xml:"TelVoice,omitempty"`
+}
 
-	PbOrder struct {
-		OrderType              string `xml:"OrderType,omitempty"`
-		TotalNumberPayments    string `xml:"TotalNumberPayments,omitempty"`
-		OrderFrequencyCycle    string `xml:"OrderFrequencyCycle,omitempty"`
-		OrderFrequencyInterval string `xml:"OrderFrequencyInterval,omitempty"`
-		Desc                   string `xml:"Desc,omitempty"`
-		Price                  string `xml:"Price,omitempty"`
-		Total                  string `xml:"Total,omitempty"`
-	} `xml:"PbOrder,omitempty"`
+type Pb struct {
+	OrderType              interface{} `xml:"OrderType,omitempty"`
+	TotalNumberPayments    interface{} `xml:"TotalNumberPayments,omitempty"`
+	OrderFrequencyCycle    interface{} `xml:"OrderFrequencyCycle,omitempty"`
+	OrderFrequencyInterval interface{} `xml:"OrderFrequencyInterval,omitempty"`
+	Desc                   interface{} `xml:"Desc,omitempty"`
+	Price                  interface{} `xml:"Price,omitempty"`
+	Total                  interface{} `xml:"Total,omitempty"`
+}
 
-	VersionInfo string `xml:"VersionInfo,omitempty"`
+type Item struct {
+	Id          interface{} `xml:"Id,omitempty"`
+	ItemNumber  interface{} `xml:"ItemNumber,omitempty"`
+	ProductCode interface{} `xml:"ProductCode,omitempty"`
+	Qty         interface{} `xml:"Qty,omitempty"`
+	Desc        interface{} `xml:"Desc,omitempty"`
+	Price       interface{} `xml:"Price,omitempty"`
+	Total       interface{} `xml:"Total,omitempty"`
+}
+
+type ItemList struct {
+	Items []*Item `xml:"OrderItem,omitempty"`
 }
 
 type Response struct {
@@ -123,7 +113,7 @@ type Response struct {
 	ErrMsg         string   `xml:"ErrMsg,omitempty"`
 }
 
-func (api *API) Transaction(request Request) (response Response) {
+func (api *API) Transaction(request *Request) (response Response) {
 	postdata, _ := xml.Marshal(request)
 	res, err := http.Post(EndPoints[api.Bank], "text/xml; charset=utf-8", strings.NewReader(xml.Header+string(postdata)))
 	if err != nil {
