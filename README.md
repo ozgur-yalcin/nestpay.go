@@ -14,6 +14,7 @@ go get github.com/ozgur-soft/nestpay
 package main
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 
@@ -56,6 +57,7 @@ func main() {
 package main
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 
@@ -85,6 +87,7 @@ func main() {
 package main
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 
