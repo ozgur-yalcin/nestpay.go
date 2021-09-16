@@ -121,13 +121,13 @@ func (api *API) Transaction(ctx context.Context, req *Request) (res Response) {
 		log.Println(err)
 		return res
 	}
-	client := new(http.Client)
 	request, err := http.NewRequestWithContext(ctx, EndPoints[api.Bank], "POST", strings.NewReader(xml.Header+string(postdata)))
 	if err != nil {
 		log.Println(err)
 		return res
 	}
 	request.Header.Set("Content-Type", "text/xml; charset=utf-8")
+	client := new(http.Client)
 	response, err := client.Do(request)
 	if err != nil {
 		log.Println(err)
@@ -135,6 +135,6 @@ func (api *API) Transaction(ctx context.Context, req *Request) (res Response) {
 	}
 	defer response.Body.Close()
 	decoder := xml.NewDecoder(response.Body)
-	decoder.Decode(&response)
+	decoder.Decode(&res)
 	return res
 }
