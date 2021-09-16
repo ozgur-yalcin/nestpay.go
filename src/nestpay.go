@@ -121,7 +121,7 @@ func (api *API) Transaction(ctx context.Context, req *Request) (res Response) {
 		log.Println(err)
 		return res
 	}
-	request, err := http.NewRequestWithContext(ctx, EndPoints[api.Bank], "POST", strings.NewReader(xml.Header+string(postdata)))
+	request, err := http.NewRequestWithContext(ctx, "POST", EndPoints[api.Bank], strings.NewReader(xml.Header+string(postdata)))
 	if err != nil {
 		log.Println(err)
 		return res
