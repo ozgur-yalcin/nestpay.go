@@ -45,7 +45,7 @@ func main() {
 	//request.PayerSecurityLevel = ""
 	//request.PayerAuthenticationCode = ""
 	//request.CardholderPresentCode = ""
-	response := api.Transaction(request)
+	response := api.Transaction(context.Background(), request)
 	pretty, _ := xml.MarshalIndent(response, " ", " ")
 	fmt.Println(string(pretty))
 }
@@ -74,7 +74,7 @@ func main() {
 	request.OrderId = "ORDER-"                   // Sipariş numarası
 	request.Total = "0.00"                       // İade tutarı
 	request.Currency = nestpay.Currencies["TRY"] // Para birimi
-	response := api.Transaction(request)
+	response := api.Transaction(context.Background(), request)
 	pretty, _ := xml.MarshalIndent(response, " ", " ")
 	fmt.Println(string(pretty))
 }
@@ -103,7 +103,7 @@ func main() {
 	request.OrderId = "ORDER-"                   // Sipariş numarası
 	request.Total = "0.00"                       // İptal tutarı
 	request.Currency = nestpay.Currencies["TRY"] // Para birimi
-	response := api.Transaction(request)
+	response := api.Transaction(context.Background(), request)
 	pretty, _ := xml.MarshalIndent(response, " ", " ")
 	fmt.Println(string(pretty))
 }

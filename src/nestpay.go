@@ -1,6 +1,7 @@
 package nestpay
 
 import (
+	"context"
 	"encoding/xml"
 	"log"
 	"net/http"
@@ -114,15 +115,26 @@ type Response struct {
 	ErrMsg         string   `xml:"ErrMsg,omitempty"`
 }
 
-func (api *API) Transaction(request *Request) (response Response) {
-	postdata, _ := xml.Marshal(request)
-	res, err := http.Post(EndPoints[api.Bank], "text/xml; charset=utf-8", strings.NewReader(xml.Header+string(postdata)))
+func (api *API) Transaction(ctx context.Context, req *Request) (res Response) {
+	postdata, err := xml.Marshal(req)
 	if err != nil {
 		log.Println(err)
-		return response
+		return res
 	}
-	defer res.Body.Close()
-	decoder := xml.NewDecoder(res.Body)
+	client := new(http.Client)
+	request, err := http.NewRequestWithContext(ctx, EndPoints[api.Bank], "POST", strings.NewReader(xml.Header+string(postdata)))
+	if err != nil {
+		log.Println(err)
+		return res
+	}
+	request.Header.Set("Content-Type", "text/xml; charset=utf-8")
+	response, err := client.Do(request)
+	if err != nil {
+		log.Println(err)
+		return res
+	}
+	defer response.Body.Close()
+	decoder := xml.NewDecoder(response.Body)
 	decoder.Decode(&response)
-	return response
+	return res
 }
