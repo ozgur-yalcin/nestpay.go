@@ -22,24 +22,24 @@ import (
 )
 
 func main() {
-	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	// Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
-	// TEST : "T" - PRODUCTION "P"
+	// Test : "T" - Production "P" (zorunlu)
 	req.SetMode("P")
-	// Müşteri IP adresi (zorunlu)
+	// Müşteri IPv4 adresi (zorunlu)
 	req.SetIPAddress("1.2.3.4")
-	// Kart numarası
+	// Kart numarası (zorunlu)
 	req.SetCardNumber("4242424242424242")
-	// Son kullanma tarihi (Ay ve Yılın son 2 hanesi) AA,YY
+	// Son kullanma tarihi (Ay ve yılın son 2 hanesi) AA,YY (zorunlu)
 	req.SetExpires("02", "20")
-	// Cvv2 Kodu (kartın arka yüzündeki 3 haneli numara)
+	// Cvv2 kodu (kartın arka yüzündeki 3 haneli numara) (zorunlu)
 	req.SetCvv2("000")
-	// Satış tutarı
+	// Satış tutarı (zorunlu)
 	req.SetAmount("1.00")
+	// Para birimi (zorunlu)
+	req.SetCurrency("TRY")
 	// Taksit sayısı
 	req.SetInstalment("")
-	// Para birimi
-	req.SetCurrency("TRY")
 
 	// Fatura
 	req.BillTo = new(nestpay.To)
@@ -73,15 +73,15 @@ import (
 )
 
 func main() {
-	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	// Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
-	// TEST : "T" - PRODUCTION "P"
+	// Test : "T" - Production "P" (zorunlu)
 	req.SetMode("P")
-	// Sipariş numarası
+	// Sipariş numarası (zorunlu)
 	req.SetOrderId("ORDER-")
-	// Satış tutarı
+	// Satış tutarı (zorunlu)
 	req.SetAmount("1.00")
-	// Para birimi
+	// Para birimi (zorunlu)
 	req.SetCurrency("TRY")
 
 	// İade
@@ -105,18 +105,18 @@ import (
 )
 
 func main() {
-	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	// Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
-	// TEST : "T" - PRODUCTION "P"
+	// Test : "T" - Production "P" (zorunlu)
 	req.SetMode("P")
-	// Sipariş numarası
+	// Sipariş numarası (zorunlu)
 	req.SetOrderId("ORDER-")
-	// Satış tutarı
+	// Satış tutarı (zorunlu)
 	req.SetAmount("1.00")
-	// Para birimi
+	// Para birimi (zorunlu)
 	req.SetCurrency("TRY")
 
-	// İade
+	// İptal
 	ctx := context.Background()
 	res := api.Cancel(ctx, req)
 	pretty, _ := xml.MarshalIndent(res, " ", " ")
