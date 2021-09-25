@@ -115,6 +115,67 @@ type Response struct {
 	ErrMsg         string   `xml:"ErrMsg,omitempty"`
 }
 
+func Api(bank, clientid, username, password string) (*API, *Request) {
+	api := new(API)
+	api.Bank = bank
+	request := new(Request)
+	request.ClientId = clientid
+	request.Username = username
+	request.Password = password
+	return api, request
+}
+
+func (request *Request) SetMode(mode string) {
+	request.Mode = mode
+}
+
+func (request *Request) SetIPAddress(ip string) {
+	request.IPAddress = ip
+}
+
+func (request *Request) SetCardNumber(number string) {
+	request.Number = number
+}
+
+func (request *Request) SetExpires(month, year string) {
+	request.Expires = month + "/" + year
+}
+
+func (request *Request) SetCvv2(cvv2 string) {
+	request.Cvv2Val = cvv2
+}
+
+func (request *Request) SetAmount(total string) {
+	request.Total = total
+}
+
+func (request *Request) SetInstalment(ins string) {
+	request.Instalment = ins
+}
+
+func (request *Request) SetCurrency(currency string) {
+	request.Currency = Currencies[currency]
+}
+
+func (request *Request) SetOrderId(oid string) {
+	request.OrderId = oid
+}
+
+func (api *API) Pay(ctx context.Context, req *Request) Response {
+	req.Type = "Auth"
+	return api.Transaction(ctx, req)
+}
+
+func (api *API) Refund(ctx context.Context, req *Request) Response {
+	req.Type = "Credit"
+	return api.Transaction(ctx, req)
+}
+
+func (api *API) Cancel(ctx context.Context, req *Request) Response {
+	req.Type = "Void"
+	return api.Transaction(ctx, req)
+}
+
 func (api *API) Transaction(ctx context.Context, req *Request) (res Response) {
 	postdata, err := xml.Marshal(req)
 	if err != nil {

@@ -22,32 +22,40 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	request := new(nestpay.Request)
-	request.ClientId = "" // Müşteri No
-	request.Username = "" // Kullanıcı adı
-	request.Password = "" // Şifre
-	// Ödeme
-	request.Type = "Auth"
-	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
-	request.IPAddress = "1.2.3.4"                // Müşteri IP adresi (zorunlu)
-	request.Number = "4242424242424242"          // Kart numarası
-	request.Expires = "02/20"                    // Son kullanma tarihi (Ay ve Yılın son 2 hanesi) AA/YY
-	request.Cvv2Val = "000"                      // Cvv2 Kodu (kartın arka yüzündeki 3 haneli numara)
-	request.Total = "1.00"                       // Satış tutarı
-	request.Instalment = ""                      // Taksit sayısı
-	request.Currency = nestpay.Currencies["TRY"] // Para birimi
+	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
+	// TEST : "T" - PRODUCTION "P"
+	req.SetMode("P")
+	// Müşteri IP adresi (zorunlu)
+	req.SetIPAddress("1.2.3.4")
+	// Kart numarası
+	req.SetCardNumber("4242424242424242")
+	// Son kullanma tarihi (Ay ve Yılın son 2 hanesi) AA,YY
+	req.SetExpires("02", "20")
+	// Cvv2 Kodu (kartın arka yüzündeki 3 haneli numara)
+	req.SetCvv2("000")
+	// Satış tutarı
+	req.SetAmount("1.00")
+	// Taksit sayısı
+	req.SetInstalment("")
+	// Para birimi
+	req.SetCurrency("TRY")
+
 	// Fatura
-	request.BillTo = new(nestpay.To)
-	request.BillTo.Name = ""     // Kart sahibi
-	request.BillTo.TelVoice = "" // Telefon numarası
+	req.BillTo = new(nestpay.To)
+	req.BillTo.Name = ""     // Kart sahibi
+	req.BillTo.TelVoice = "" // Telefon numarası
+
 	// 3D (varsa)
-	//request.PayerTxnId = ""
-	//request.PayerSecurityLevel = ""
-	//request.PayerAuthenticationCode = ""
-	//request.CardholderPresentCode = ""
-	response := api.Transaction(context.Background(), request)
-	pretty, _ := xml.MarshalIndent(response, " ", " ")
+	//req.PayerTxnId = ""
+	//req.PayerSecurityLevel = ""
+	//req.PayerAuthenticationCode = ""
+	//req.CardholderPresentCode = ""
+
+	// Satış
+	ctx := context.Background()
+	res := api.Pay(ctx, req)
+	pretty, _ := xml.MarshalIndent(res, " ", " ")
 	fmt.Println(string(pretty))
 }
 ```
@@ -65,19 +73,21 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	request := new(nestpay.Request)
-	request.ClientId = "" // Müşteri No
-	request.Username = "" // Kullanıcı adı
-	request.Password = "" // Şifre
+	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
+	// TEST : "T" - PRODUCTION "P"
+	req.SetMode("P")
+	// Sipariş numarası
+	req.SetOrderId("ORDER-")
+	// Satış tutarı
+	req.SetAmount("1.00")
+	// Para birimi
+	req.SetCurrency("TRY")
+
 	// İade
-	request.Type = "Credit"
-	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
-	request.OrderId = "ORDER-"                   // Sipariş numarası
-	request.Total = "0.00"                       // İade tutarı
-	request.Currency = nestpay.Currencies["TRY"] // Para birimi
-	response := api.Transaction(context.Background(), request)
-	pretty, _ := xml.MarshalIndent(response, " ", " ")
+	ctx := context.Background()
+	res := api.Refund(ctx, req)
+	pretty, _ := xml.MarshalIndent(res, " ", " ")
 	fmt.Println(string(pretty))
 }
 ```
@@ -95,19 +105,21 @@ import (
 )
 
 func main() {
-	api := &nestpay.API{"asseco"} // "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	request := new(nestpay.Request)
-	request.ClientId = "" // Müşteri No
-	request.Username = "" // Kullanıcı adı
-	request.Password = "" // Şifre
-	// İptal
-	request.Type = "Void"
-	request.Mode = "P"                           // TEST : "T" - PRODUCTION "P"
-	request.OrderId = "ORDER-"                   // Sipariş numarası
-	request.Total = "0.00"                       // İptal tutarı
-	request.Currency = nestpay.Currencies["TRY"] // Para birimi
-	response := api.Transaction(context.Background(), request)
-	pretty, _ := xml.MarshalIndent(response, " ", " ")
+	// banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	api, req := nestpay.Api("banka adı", "müşteri no", "kullanıcı adı", "şifre")
+	// TEST : "T" - PRODUCTION "P"
+	req.SetMode("P")
+	// Sipariş numarası
+	req.SetOrderId("ORDER-")
+	// Satış tutarı
+	req.SetAmount("1.00")
+	// Para birimi
+	req.SetCurrency("TRY")
+
+	// İade
+	ctx := context.Background()
+	res := api.Cancel(ctx, req)
+	pretty, _ := xml.MarshalIndent(res, " ", " ")
 	fmt.Println(string(pretty))
 }
 ```
