@@ -1,12 +1,12 @@
-[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-soft/nestpay/blob/master/LICENSE.md)
-[![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay)](https://pkg.go.dev/github.com/ozgur-soft/nestpay/src)
+[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-soft/nestpay.go/blob/master/LICENSE.md)
+[![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay.go)](https://pkg.go.dev/github.com/ozgur-soft/nestpay.go/src)
 
-# Nestpay
+# Nestpay.go
 NestPay (EST) (Asseco, Akbank, İş Bankası, Ziraat Bankası, Halkbank, Finansbank, TEB) Sanal POS API with golang
 
 # Installation
 ```bash
-go get github.com/ozgur-soft/nestpay
+go get github.com/ozgur-soft/nestpay.go
 ```
 
 # Sanalpos satış işlemi
@@ -18,7 +18,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay.go/src"
 )
 
 func main() {
@@ -69,7 +69,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay.go/src"
 )
 
 func main() {
@@ -101,7 +101,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay/src"
+	nestpay "github.com/ozgur-soft/nestpay.go/src"
 )
 
 func main() {
