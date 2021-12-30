@@ -1,3 +1,3 @@
-module github.com/ozgur-soft/nestpay
+module github.com/ozgur-soft/nestpay.go
 
-go 1.15
+go 1.17
