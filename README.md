@@ -2,7 +2,7 @@
 [![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay.go)](https://pkg.go.dev/github.com/ozgur-soft/nestpay.go/src)
 
 # Nestpay.go
-NestPay (EST) (Asseco, Akbank, İş Bankası, Ziraat Bankası, Halkbank, Finansbank, TEB) Sanal POS API with golang
+NestPay (EST) (Asseco, Akbank, İş Bankası, Ziraat Bankası, Halkbank, Finansbank, TEB) Virtual POS API with golang
 
 # Installation
 ```bash
@@ -31,14 +31,14 @@ func main() {
 	// Kart numarası (zorunlu)
 	req.SetCardNumber("4242424242424242")
 	// Son kullanma tarihi (Ay ve yılın son 2 hanesi) AA,YY (zorunlu)
-	req.SetExpires("02", "20")
+	req.SetCardExpiry("02", "20")
 	// Cvv2 kodu (kartın arka yüzündeki 3 haneli numara) (zorunlu)
-	req.SetCvv2("000")
+	req.SetCardCode("000")
 	// Satış tutarı (zorunlu)
 	req.SetAmount("1.00")
 	// Para birimi (zorunlu)
 	req.SetCurrency("TRY")
-	// Taksit sayısı
+	// Taksit sayısı (varsa)
 	req.SetInstalment("")
 
 	// Fatura
