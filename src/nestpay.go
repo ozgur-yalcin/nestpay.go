@@ -46,9 +46,9 @@ type Request struct {
 	Email      interface{} `xml:"Email,omitempty"`
 	Mode       interface{} `xml:"Mode,omitempty"`
 	Type       interface{} `xml:"Type,omitempty"`
-	Number     interface{} `xml:"Number,omitempty"`
-	Expires    interface{} `xml:"Expires,omitempty"`
-	Cvv2Val    interface{} `xml:"Cvv2Val,omitempty"`
+	CardNumber interface{} `xml:"Number,omitempty"`
+	CardExpiry interface{} `xml:"Expires,omitempty"`
+	CardCode   interface{} `xml:"Cvv2Val,omitempty"`
 	Total      interface{} `xml:"Total,omitempty"`
 	Currency   interface{} `xml:"Currency,omitempty"`
 	Instalment interface{} `xml:"Instalment,omitempty"`
@@ -134,15 +134,15 @@ func (request *Request) SetIPAddress(ip string) {
 }
 
 func (request *Request) SetCardNumber(number string) {
-	request.Number = number
+	request.CardNumber = number
 }
 
-func (request *Request) SetExpires(month, year string) {
-	request.Expires = month + "/" + year
+func (request *Request) SetCardExpiry(month, year string) {
+	request.CardExpiry = month + "/" + year
 }
 
-func (request *Request) SetCvv2(cvv2 string) {
-	request.Cvv2Val = cvv2
+func (request *Request) SetCardCode(code string) {
+	request.CardCode = code
 }
 
 func (request *Request) SetAmount(total string) {
