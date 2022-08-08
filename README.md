@@ -2,14 +2,14 @@
 [![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay.go)](https://pkg.go.dev/github.com/ozgur-soft/nestpay.go/src)
 
 # Nestpay.go
-NestPay (EST) (Asseco, Akbank, İş Bankası, Ziraat Bankası, Halkbank, Finansbank, TEB) Virtual POS API with golang
+NestPay POS API with golang
 
 # Installation
 ```bash
 go get github.com/ozgur-soft/nestpay.go
 ```
 
-# Sanalpos satış işlemi
+# Satış
 ```go
 package main
 
@@ -57,7 +57,7 @@ func main() {
 }
 ```
 
-# Sanalpos iade işlemi
+# İade
 ```go
 package main
 
@@ -96,7 +96,7 @@ func main() {
 }
 ```
 
-# Sanalpos iptal işlemi
+# İptal
 ```go
 package main
 
