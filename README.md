@@ -23,7 +23,7 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
 	clientid = ""       // Müşteri numarası
 	username = ""       // Kullanıcı adı
@@ -71,7 +71,7 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
 	clientid = ""       // Müşteri numarası
 	username = ""       // Kullanıcı adı
@@ -110,7 +110,7 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
 	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
 	clientid = ""       // Müşteri numarası
 	username = ""       // Kullanıcı adı
