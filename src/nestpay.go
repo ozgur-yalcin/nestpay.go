@@ -37,7 +37,7 @@ var EndPoints = map[string]string{
 	"teb3D": "https://sanalpos.teb.com.tr/fim/est3Dgate",
 }
 
-var Currencies = map[string]string{
+var CurrencyCode = map[string]string{
 	"TRY": "949",
 	"YTL": "949",
 	"TRL": "949",
@@ -262,7 +262,7 @@ func (request *Request) SetCardCode(code string) {
 
 func (request *Request) SetAmount(total string, currency string) {
 	request.Total = total
-	request.Currency = Currencies[currency]
+	request.Currency = CurrencyCode[currency]
 }
 
 func (request *Request) SetInstallment(ins string) {
