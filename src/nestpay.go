@@ -14,7 +14,10 @@ import (
 	"time"
 )
 
-var EndPoints map[string]string = map[string]string{
+var EndPoints = map[string]string{
+	"asseco":   "https://entegrasyon.asseco-see.com.tr/fim/api",
+	"asseco3D": "https://entegrasyon.asseco-see.com.tr/fim/est3Dgate",
+
 	"akbank":   "https://www.sanalakpos.com/fim/api",
 	"akbank3D": "https://www.sanalakpos.com/fim/est3Dgate",
 
@@ -34,7 +37,7 @@ var EndPoints map[string]string = map[string]string{
 	"teb3D": "https://sanalpos.teb.com.tr/fim/est3Dgate",
 }
 
-var Currencies map[string]string = map[string]string{
+var Currencies = map[string]string{
 	"TRY": "949",
 	"YTL": "949",
 	"TRL": "949",
@@ -45,7 +48,7 @@ var Currencies map[string]string = map[string]string{
 	"JPY": "392",
 }
 
-var CurrencyISO map[string]string = map[string]string{
+var CurrencyISO = map[string]string{
 	"949": "TRY",
 	"840": "USD",
 	"978": "EUR",
