@@ -10,13 +10,19 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
+
+	"golang.org/x/net/html/charset"
 )
 
 var EndPoints = map[string]string{
 	"asseco":   "https://entegrasyon.asseco-see.com.tr/fim/api",
 	"asseco3D": "https://entegrasyon.asseco-see.com.tr/fim/est3Dgate",
+
+	"anadolu":   "https://anadolusanalpos.est.com.tr/fim/api",
+	"anadolu3D": "https://anadolusanalpos.est.com.tr/fim/est3Dgate",
 
 	"akbank":   "https://www.sanalakpos.com/fim/api",
 	"akbank3D": "https://www.sanalakpos.com/fim/est3Dgate",
@@ -343,13 +349,18 @@ func (api *API) Transaction(ctx context.Context, req *Request) (res Response, er
 	}
 	defer response.Body.Close()
 	decoder := xml.NewDecoder(response.Body)
+	decoder.CharsetReader = charset.NewReaderLabel
 	if err := decoder.Decode(&res); err != nil {
 		return res, err
 	}
-	switch res.ProcReturnCode {
-	case "00":
-		return res, nil
-	default:
+	if code, err := strconv.Atoi(res.ProcReturnCode); err == nil {
+		switch code {
+		case 0:
+			return res, nil
+		default:
+			return res, errors.New(res.ErrMsg)
+		}
+	} else {
 		return res, errors.New(res.ErrMsg)
 	}
 }
@@ -363,6 +374,7 @@ func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, er
 	html = append(html, `<!DOCTYPE html>`)
 	html = append(html, `<html>`)
 	html = append(html, `<head>`)
+	html = append(html, `<meta http-equiv="Content-Type" content="text/html; charset=utf-8">`)
 	html = append(html, `<script type="text/javascript">function submitonload() {document.payment.submit();document.getElementById('button').remove();document.getElementById('body').insertAdjacentHTML("beforeend", "Lütfen bekleyiniz...");}</script>`)
 	html = append(html, `</head>`)
 	html = append(html, `<body onload="javascript:submitonload();" id="body" style="text-align:center;margin:10px;font-family:Arial;font-weight:bold;">`)
