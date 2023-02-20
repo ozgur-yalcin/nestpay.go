@@ -23,11 +23,11 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
-	clientid = ""       // Müşteri numarası
-	username = ""       // Kullanıcı adı
-	password = ""       // Şifre
+	bankname = "asseco"    // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	envmode  = "TEST"      // Çalışma ortamı (Production : "PROD" - Test : "TEST")
+	clientid = "100100000" // Müşteri numarası
+	username = "AKTESTAPI" // Kullanıcı adı
+	password = "AKBANK01"  // Şifre
 )
 
 func main() {
@@ -35,16 +35,16 @@ func main() {
 	req.SetMode(envmode)
 
 	req.SetIPAddress("1.2.3.4")           // Müşteri IPv4 adresi (zorunlu)
-	req.SetCardNumber("4242424242424242") // Kart numarası (zorunlu)
-	req.SetCardExpiry("02", "20")         // Son kullanma tarihi - AA,YY (zorunlu)
+	req.SetCardNumber("4355084355084358") // Kart numarası (zorunlu)
+	req.SetCardExpiry("12", "30")         // Son kullanma tarihi - AA,YY (zorunlu)
 	req.SetCardCode("000")                // Kart arkasındaki 3 haneli numara (zorunlu)
 	req.SetAmount("1.00", "TRY")          // Satış tutarı ve para birimi (zorunlu)
 	req.SetInstallment("")                // Taksit sayısı (varsa)
 
 	// Kişisel bilgiler (zorunlu)
 	req.BillTo = new(nestpay.To)
-	req.BillTo.Name = ""     // Kart sahibi
-	req.BillTo.TelVoice = "" // Telefon numarası
+	req.BillTo.Name = ""  // Kart sahibi
+	req.BillTo.Phone = "" // Telefon numarası
 
 	// Satış
 	ctx := context.Background()
@@ -71,11 +71,11 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
-	clientid = ""       // Müşteri numarası
-	username = ""       // Kullanıcı adı
-	password = ""       // Şifre
+	bankname = "asseco"    // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	envmode  = "TEST"      // Çalışma ortamı (Production : "PROD" - Test : "TEST")
+	clientid = "100100000" // Müşteri numarası
+	username = "AKTESTAPI" // Kullanıcı adı
+	password = "AKBANK01"  // Şifre
 )
 
 func main() {
@@ -110,11 +110,11 @@ import (
 
 // Pos bilgileri
 const (
-	bankname = "akbank" // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
-	envmode  = "PROD"   // Çalışma ortamı (Production : "PROD" - Test : "TEST")
-	clientid = ""       // Müşteri numarası
-	username = ""       // Kullanıcı adı
-	password = ""       // Şifre
+	bankname = "asseco"    // Banka adı : "asseco","akbank","isbank","ziraatbank","halkbank","finansbank","teb"
+	envmode  = "TEST"      // Çalışma ortamı (Production : "PROD" - Test : "TEST")
+	clientid = "100100000" // Müşteri numarası
+	username = "AKTESTAPI" // Kullanıcı adı
+	password = "AKBANK01"  // Şifre
 )
 
 func main() {
