@@ -1,12 +1,12 @@
-[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-soft/nestpay.go/blob/master/LICENSE.md)
-[![documentation](https://pkg.go.dev/badge/github.com/ozgur-soft/nestpay.go)](https://pkg.go.dev/github.com/ozgur-soft/nestpay.go/src)
+[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-yalcin/nestpay.go/blob/master/LICENSE.md)
+[![documentation](https://pkg.go.dev/badge/github.com/ozgur-yalcin/nestpay.go)](https://pkg.go.dev/github.com/ozgur-yalcin/nestpay.go/src)
 
 # Nestpay.go
 NestPay POS API with golang
 
 # Installation
 ```bash
-go get github.com/ozgur-soft/nestpay.go
+go get github.com/ozgur-yalcin/nestpay.go
 ```
 
 # Satış
@@ -18,7 +18,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay.go/src"
+	nestpay "github.com/ozgur-yalcin/nestpay.go/src"
 )
 
 // Pos bilgileri
@@ -66,7 +66,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay.go/src"
+	nestpay "github.com/ozgur-yalcin/nestpay.go/src"
 )
 
 // Pos bilgileri
@@ -105,7 +105,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	nestpay "github.com/ozgur-soft/nestpay.go/src"
+	nestpay "github.com/ozgur-yalcin/nestpay.go/src"
 )
 
 // Pos bilgileri
