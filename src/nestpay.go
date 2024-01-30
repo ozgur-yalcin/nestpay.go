@@ -2,7 +2,7 @@ package nestpay
 
 import (
 	"context"
-	"crypto/sha1"
+	"crypto/sha512"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/xml"
@@ -10,6 +10,8 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"net/url"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -99,6 +101,7 @@ type Request struct {
 	OrderItemList   *ItemList `xml:"OrderItemList,omitempty"`
 	Random          string    `xml:",omitempty" form:"rnd,omitempty"`
 	Hash            string    `xml:",omitempty" form:"hash,omitempty"`
+	HashAlgorithm   string    `xml:",omitempty" form:"hashAlgorithm,omitempty"`
 	OkUrl           string    `xml:",omitempty" form:"okUrl,omitempty"`
 	FailUrl         string    `xml:",omitempty" form:"failUrl,omitempty"`
 	VersionInfo     string    `xml:"VersionInfo,omitempty"`
@@ -190,8 +193,8 @@ func HEX(data string) (hash string) {
 	return hash
 }
 
-func SHA1(data string) (hash string) {
-	h := sha1.New()
+func SHA512(data string) (hash string) {
+	h := sha512.New()
 	h.Write([]byte(data))
 	hash = hex.EncodeToString(h.Sum(nil))
 	return hash
@@ -211,8 +214,20 @@ func D64(data string) []byte {
 	return b
 }
 
-func Hash(data string) string {
-	return B64(HEX(SHA1(data)))
+func Hash(form url.Values, secret string) string {
+	hash := []string{}
+	keys := []string{}
+	for k := range form {
+		if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
+			keys = append(keys, k)
+		}
+	}
+	sort.Slice(keys, func(i, j int) bool { return strings.ToLower(keys[i]) < strings.ToLower(keys[j]) })
+	for _, k := range keys {
+		hash = append(hash, form.Get(k))
+	}
+	hash = append(hash, secret)
+	return B64(HEX(SHA512(strings.Join(hash, "|"))))
 }
 
 func Api(bank, clientid, username, password string) (*API, *Request) {
@@ -303,18 +318,26 @@ func (api *API) Auth3D(ctx context.Context, req *Request) (Response, error) {
 }
 
 func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	req.StoreType = "3d"
 	req.TransactionType = "PreAuth"
+	req.HashAlgorithm = "ver3"
+	req.StoreType = "3d"
 	req.Random = Random(6)
-	req.Hash = Hash(req.ClientId + req.OrderId + req.Total + req.OkUrl + req.FailUrl + req.TransactionType + req.Installment + req.Random + api.Key)
+	form, err := QueryString(req)
+	if err == nil {
+		req.Hash = Hash(form, api.Key)
+	}
 	return api.Transaction3D(ctx, req)
 }
 
 func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	req.StoreType = "3d"
 	req.TransactionType = "Auth"
+	req.HashAlgorithm = "ver3"
+	req.StoreType = "3d"
 	req.Random = Random(6)
-	req.Hash = Hash(req.ClientId + req.OrderId + req.Total + req.OkUrl + req.FailUrl + req.TransactionType + req.Installment + req.Random + api.Key)
+	form, err := QueryString(req)
+	if err == nil {
+		req.Hash = Hash(form, api.Key)
+	}
 	return api.Transaction3D(ctx, req)
 }
 
@@ -371,6 +394,11 @@ func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, er
 	if err != nil {
 		return res, err
 	}
+	keys := []string{}
+	for k := range payload {
+		keys = append(keys, k)
+	}
+	sort.Slice(keys, func(i, j int) bool { return strings.ToLower(keys[i]) < strings.ToLower(keys[j]) })
 	html := []string{}
 	html = append(html, `<!DOCTYPE html>`)
 	html = append(html, `<html>`)
@@ -380,7 +408,7 @@ func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, er
 	html = append(html, `</head>`)
 	html = append(html, `<body onload="javascript:submitonload();" id="body" style="text-align:center;margin:10px;font-family:Arial;font-weight:bold;">`)
 	html = append(html, `<form action="`+EndPoints[api.Bank+"3D"]+`" method="post" name="payment">`)
-	for k := range payload {
+	for _, k := range keys {
 		html = append(html, `<input type="hidden" name="`+k+`" value="`+payload.Get(k)+`">`)
 	}
 	html = append(html, `<input type="submit" value="Gönder" id="button">`)
