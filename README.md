@@ -1,4 +1,5 @@
-**- This repository is DEPRECATED, [moved here](https://github.com/ozgur-yalcin/akbankpos.go) -**
+[![license](https://img.shields.io/:license-mit-blue.svg)](https://github.com/ozgur-yalcin/nestpay.go/blob/master/LICENSE.md)
+[![documentation](https://pkg.go.dev/badge/github.com/ozgur-yalcin/nestpay.go)](https://pkg.go.dev/github.com/ozgur-yalcin/nestpay.go/src)
 
 # Nestpay.go
 NestPay POS API with golang
