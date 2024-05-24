@@ -70,46 +70,49 @@ type API struct {
 }
 
 type Request struct {
-	XMLName         xml.Name  `xml:"CC5Request,omitempty"`
-	Username        string    `xml:"Name,omitempty"`
-	Password        string    `xml:"Password,omitempty"`
-	ClientId        string    `xml:"ClientId,omitempty" form:"clientid,omitempty"`
-	OrderId         string    `xml:"OrderId,omitempty" form:"oid,omitempty"`
-	GroupId         string    `xml:"GroupId,omitempty"`
-	TransId         string    `xml:"TransId,omitempty"`
-	UserId          string    `xml:"UserId,omitempty"`
-	IPAddress       string    `xml:"IPAddress,omitempty"`
-	Email           string    `xml:"Email,omitempty"`
-	Mode            string    `xml:"Mode,omitempty"`
-	StoreType       string    `xml:",omitempty" form:"storetype,omitempty"`
-	TransactionType string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
-	CardNumber      string    `xml:"Number,omitempty" form:"pan,omitempty"`
-	CardMonth       string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
-	CardYear        string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Year,omitempty"`
-	CardExpiry      string    `xml:"Expires,omitempty"`
-	CardCode        string    `xml:"Cvv2Val,omitempty" form:"cv2,omitempty"`
-	Total           string    `xml:"Total,omitempty" form:"amount,omitempty"`
-	Currency        string    `xml:"Currency,omitempty" form:"currency,omitempty"`
-	Installment     string    `xml:"Instalment,omitempty" form:"taksit,omitempty"`
-	XID             string    `xml:"PayerTxnId,omitempty"`
-	ECI             string    `xml:"PayerSecurityLevel,omitempty"`
-	CAVV            string    `xml:"PayerAuthenticationCode,omitempty"`
-	PresentCode     string    `xml:"CardholderPresentCode,omitempty"`
-	BillTo          *To       `xml:"BillTo,omitempty"`
-	ShipTo          *To       `xml:"ShipTo,omitempty"`
-	PbOrder         *Pb       `xml:"PbOrder,omitempty"`
-	OrderItemList   *ItemList `xml:"OrderItemList,omitempty"`
-	Random          string    `xml:",omitempty" form:"rnd,omitempty"`
-	Hash            string    `xml:",omitempty" form:"hash,omitempty"`
-	HashAlgorithm   string    `xml:",omitempty" form:"hashAlgorithm,omitempty"`
-	OkUrl           string    `xml:",omitempty" form:"okUrl,omitempty"`
-	FailUrl         string    `xml:",omitempty" form:"failUrl,omitempty"`
-	VersionInfo     string    `xml:"VersionInfo,omitempty"`
+	XMLName       xml.Name  `xml:"CC5Request,omitempty"`
+	Username      string    `xml:"Name,omitempty"`
+	Password      string    `xml:"Password,omitempty"`
+	ClientId      string    `xml:"ClientId,omitempty" form:"clientid,omitempty"`
+	OrderId       string    `xml:"OrderId,omitempty" form:"oid,omitempty"`
+	GroupId       string    `xml:"GroupId,omitempty"`
+	TransId       string    `xml:"TransId,omitempty"`
+	UserId        string    `xml:"UserId,omitempty"`
+	IPAddress     string    `xml:"IPAddress,omitempty" form:"clientip,omitempty"`
+	Email         string    `xml:"Email,omitempty"`
+	Mode          string    `xml:"Mode,omitempty"`
+	StoreType     string    `xml:",omitempty" form:"storetype,omitempty"`
+	IslemTipi     string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
+	TranType      string    `xml:"TranType,omitempty" form:"TranType,omitempty"`
+	CardNumber    string    `xml:"Number,omitempty" form:"pan,omitempty"`
+	CardMonth     string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
+	CardYear      string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Year,omitempty"`
+	CardExpiry    string    `xml:"Expires,omitempty"`
+	CardCode      string    `xml:"Cvv2Val,omitempty" form:"cv2,omitempty"`
+	Total         string    `xml:"Total,omitempty" form:"amount,omitempty"`
+	Currency      string    `xml:"Currency,omitempty" form:"currency,omitempty"`
+	Installment   string    `xml:"Instalment,omitempty" form:"Instalment,omitempty"`
+	Taksit        string    `xml:"Instalment,omitempty" form:"taksit,omitempty"`
+	XID           string    `xml:"PayerTxnId,omitempty"`
+	ECI           string    `xml:"PayerSecurityLevel,omitempty"`
+	CAVV          string    `xml:"PayerAuthenticationCode,omitempty"`
+	PresentCode   string    `xml:"CardholderPresentCode,omitempty"`
+	BillTo        *To       `xml:"BillTo,omitempty"`
+	ShipTo        *To       `xml:"ShipTo,omitempty"`
+	PbOrder       *Pb       `xml:"PbOrder,omitempty"`
+	OrderItemList *ItemList `xml:"OrderItemList,omitempty"`
+	Random        string    `xml:",omitempty" form:"rnd,omitempty"`
+	Hash          string    `xml:",omitempty" form:"hash,omitempty"`
+	HashAlgorithm string    `xml:",omitempty" form:"hashAlgorithm,omitempty"`
+	OkUrl         string    `xml:",omitempty" form:"okUrl,omitempty"`
+	FailUrl       string    `xml:",omitempty" form:"failUrl,omitempty"`
+	Lang          string    `xml:"lang,omitempty" form:"lang,omitempty"`
+	VersionInfo   string    `xml:"VersionInfo,omitempty"`
 }
 
 type To struct {
-	Name       string `xml:"Name,omitempty" form:"cardholder,omitempty"`
-	Company    string `xml:"Company,omitempty"`
+	Name       string `xml:"Name,omitempty" form:"BillToName,omitempty"`
+	Company    string `xml:"Company,omitempty" form:"BillToCompany,omitempty"`
 	Street1    string `xml:"Street1,omitempty"`
 	Street2    string `xml:"Street2,omitempty"`
 	Street3    string `xml:"Street3,omitempty"`
@@ -214,15 +217,8 @@ func D64(data string) []byte {
 	return b
 }
 
-func Hash(form url.Values, secret string) string {
+func Hash(form url.Values, keys []string, secret string) string {
 	hash := []string{}
-	keys := []string{}
-	for k := range form {
-		if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
-			keys = append(keys, k)
-		}
-	}
-	sort.Slice(keys, func(i, j int) bool { return strings.ToLower(keys[i]) < strings.ToLower(keys[j]) })
 	for _, k := range keys {
 		hash = append(hash, form.Get(k))
 	}
@@ -291,6 +287,10 @@ func (request *Request) SetInstallment(ins string) {
 	request.Installment = ins
 }
 
+func (request *Request) SetTaksit(ins string) {
+	request.Taksit = ins
+}
+
 func (request *Request) SetOrderId(oid string) {
 	if oid != "" {
 		request.OrderId = oid
@@ -298,61 +298,120 @@ func (request *Request) SetOrderId(oid string) {
 }
 
 func (api *API) PreAuth(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "PreAuth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "PreAuth"
+	default:
+		req.IslemTipi = "PreAuth"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Auth(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "Auth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "Auth"
+	default:
+		req.IslemTipi = "Auth"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) PreAuth3D(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "PreAuth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "PreAuth"
+	default:
+		req.IslemTipi = "PreAuth"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Auth3D(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "Auth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "Auth"
+	default:
+		req.IslemTipi = "Auth"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	req.TransactionType = "PreAuth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "PreAuth"
+	default:
+		req.IslemTipi = "PreAuth"
+	}
 	req.HashAlgorithm = "ver3"
 	req.StoreType = "3d"
 	req.Random = Random(6)
 	form, err := QueryString(req)
 	if err == nil {
-		req.Hash = Hash(form, api.Key)
+		keys := []string{}
+		for k := range form {
+			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
+				keys = append(keys, k)
+			}
+		}
+		sort.Slice(keys, func(i, j int) bool { return strings.ToLower(keys[i]) < strings.ToLower(keys[j]) })
+		req.Hash = Hash(form, keys, api.Key)
 	}
 	return api.Transaction3D(ctx, req)
 }
 
 func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	req.TransactionType = "Auth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "Auth"
+	default:
+		req.IslemTipi = "Auth"
+	}
 	req.HashAlgorithm = "ver3"
 	req.StoreType = "3d"
 	req.Random = Random(6)
 	form, err := QueryString(req)
 	if err == nil {
-		req.Hash = Hash(form, api.Key)
+		keys := []string{}
+		for k := range form {
+			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
+				keys = append(keys, k)
+			}
+		}
+		sort.Slice(keys, func(i, j int) bool { return strings.ToLower(keys[i]) < strings.ToLower(keys[j]) })
+		req.Hash = Hash(form, keys, api.Key)
 	}
 	return api.Transaction3D(ctx, req)
 }
 
 func (api *API) PostAuth(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "PostAuth"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "PostAuth"
+	default:
+		req.IslemTipi = "PostAuth"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Refund(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "Credit"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "Credit"
+	default:
+		req.IslemTipi = "Credit"
+	}
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Cancel(ctx context.Context, req *Request) (Response, error) {
-	req.TransactionType = "Void"
+	switch api.Bank {
+	case "halkbank":
+		req.TranType = "Void"
+	default:
+		req.IslemTipi = "Void"
+	}
 	return api.Transaction(ctx, req)
 }
 
@@ -411,6 +470,7 @@ func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, er
 	for _, k := range keys {
 		html = append(html, `<input type="hidden" name="`+k+`" value="`+payload.Get(k)+`">`)
 	}
+	html = append(html, `<input type="hidden" name="encoding" value="UTF-8">`)
 	html = append(html, `<input type="submit" value="Gönder" id="button">`)
 	html = append(html, `</form>`)
 	html = append(html, `</body>`)
