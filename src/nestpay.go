@@ -82,8 +82,8 @@ type Request struct {
 	Email         string    `xml:"Email,omitempty"`
 	Mode          string    `xml:"Mode,omitempty"`
 	StoreType     string    `xml:",omitempty" form:"storetype,omitempty"`
-	IslemTipi     string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
-	TranType      string    `xml:"Type,omitempty" form:"TranType,omitempty"`
+	Type          string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
+	TranType      string    `xml:"TranType,omitempty" form:"TranType,omitempty"`
 	CardNumber    string    `xml:"Number,omitempty" form:"pan,omitempty"`
 	CardMonth     string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
 	CardYear      string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Year,omitempty"`
@@ -92,7 +92,7 @@ type Request struct {
 	Total         string    `xml:"Total,omitempty" form:"amount,omitempty"`
 	Currency      string    `xml:"Currency,omitempty" form:"currency,omitempty"`
 	Installment   string    `xml:"Instalment,omitempty" form:"Instalment,omitempty"`
-	Taksit        string    `xml:"Instalment,omitempty" form:"taksit,omitempty"`
+	Taksit        string    `xml:",omitempty" form:"taksit,omitempty"`
 	XID           string    `xml:"PayerTxnId,omitempty"`
 	ECI           string    `xml:"PayerSecurityLevel,omitempty"`
 	CAVV          string    `xml:"PayerAuthenticationCode,omitempty"`
@@ -298,42 +298,22 @@ func (request *Request) SetOrderId(oid string) {
 }
 
 func (api *API) PreAuth(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "PreAuth"
-	default:
-		req.IslemTipi = "PreAuth"
-	}
+	req.Type = "PreAuth"
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Auth(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "Auth"
-	default:
-		req.IslemTipi = "Auth"
-	}
+	req.Type = "Auth"
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) PreAuth3D(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "PreAuth"
-	default:
-		req.IslemTipi = "PreAuth"
-	}
+	req.Type = "PreAuth"
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Auth3D(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "Auth"
-	default:
-		req.IslemTipi = "Auth"
-	}
+	req.Type = "Auth"
 	return api.Transaction(ctx, req)
 }
 
@@ -342,7 +322,7 @@ func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error)
 	case "halkbank":
 		req.TranType = "PreAuth"
 	default:
-		req.IslemTipi = "PreAuth"
+		req.Type = "PreAuth"
 	}
 	req.HashAlgorithm = "ver3"
 	req.StoreType = "3d"
@@ -366,7 +346,7 @@ func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
 	case "halkbank":
 		req.TranType = "Auth"
 	default:
-		req.IslemTipi = "Auth"
+		req.Type = "Auth"
 	}
 	req.HashAlgorithm = "ver3"
 	req.StoreType = "3d"
@@ -386,32 +366,17 @@ func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
 }
 
 func (api *API) PostAuth(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "PostAuth"
-	default:
-		req.IslemTipi = "PostAuth"
-	}
+	req.Type = "PostAuth"
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Refund(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "Credit"
-	default:
-		req.IslemTipi = "Credit"
-	}
+	req.Type = "Credit"
 	return api.Transaction(ctx, req)
 }
 
 func (api *API) Cancel(ctx context.Context, req *Request) (Response, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "Void"
-	default:
-		req.IslemTipi = "Void"
-	}
+	req.Type = "Void"
 	return api.Transaction(ctx, req)
 }
 
