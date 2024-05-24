@@ -83,7 +83,7 @@ type Request struct {
 	Mode          string    `xml:"Mode,omitempty"`
 	StoreType     string    `xml:",omitempty" form:"storetype,omitempty"`
 	IslemTipi     string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
-	TranType      string    `xml:"TranType,omitempty" form:"TranType,omitempty"`
+	TranType      string    `xml:"Type,omitempty" form:"TranType,omitempty"`
 	CardNumber    string    `xml:"Number,omitempty" form:"pan,omitempty"`
 	CardMonth     string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
 	CardYear      string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Year,omitempty"`
