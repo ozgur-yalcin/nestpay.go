@@ -82,8 +82,7 @@ type Request struct {
 	Email         string    `xml:"Email,omitempty"`
 	Mode          string    `xml:"Mode,omitempty"`
 	StoreType     string    `xml:",omitempty" form:"storetype,omitempty"`
-	Type          string    `xml:"Type,omitempty" form:"islemtipi,omitempty"`
-	TranType      string    `xml:"TranType,omitempty" form:"TranType,omitempty"`
+	Type          string    `xml:"Type,omitempty" form:"TranType,omitempty"`
 	CardNumber    string    `xml:"Number,omitempty" form:"pan,omitempty"`
 	CardMonth     string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
 	CardYear      string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Year,omitempty"`
@@ -318,14 +317,9 @@ func (api *API) Auth3D(ctx context.Context, req *Request) (Response, error) {
 }
 
 func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "PreAuth"
-	default:
-		req.Type = "PreAuth"
-	}
+	req.Type = "PreAuth"
 	req.HashAlgorithm = "ver3"
-	req.StoreType = "3d"
+	req.StoreType = "3D"
 	req.Random = Random(6)
 	form, err := QueryString(req)
 	if err == nil {
@@ -342,14 +336,9 @@ func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error)
 }
 
 func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
-	switch api.Bank {
-	case "halkbank":
-		req.TranType = "Auth"
-	default:
-		req.Type = "Auth"
-	}
+	req.Type = "Auth"
 	req.HashAlgorithm = "ver3"
-	req.StoreType = "3d"
+	req.StoreType = "3D"
 	req.Random = Random(6)
 	form, err := QueryString(req)
 	if err == nil {
