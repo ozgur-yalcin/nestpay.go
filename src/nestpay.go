@@ -232,7 +232,6 @@ func Api(bank, clientid, username, password string) (*API, *Request) {
 	request.ClientId = clientid
 	request.Username = username
 	request.Password = password
-	request.BillTo = new(To)
 	return api, request
 }
 
@@ -256,10 +255,16 @@ func (request *Request) SetIPAddress(ip string) {
 }
 
 func (request *Request) SetPhoneNumber(phone string) {
+	if request.BillTo == nil {
+		request.BillTo = new(To)
+	}
 	request.BillTo.Phone = phone
 }
 
 func (request *Request) SetCardHolder(holder string) {
+	if request.BillTo == nil {
+		request.BillTo = new(To)
+	}
 	request.BillTo.Name = holder
 }
 
