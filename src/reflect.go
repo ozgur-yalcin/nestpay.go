@@ -54,7 +54,7 @@ func reflector(values url.Values, val reflect.Value) error {
 			ts := strings.Split(n, ",")
 			name := ts[0]
 			value := String(sv)
-			if len(ts) > 1 && ts[1] == "omitempty" && (name == "Instalment" || value != "") && value != "<nil>" {
+			if len(ts) > 1 && ts[1] == "omitempty" && value != "" && value != "<nil>" {
 				values.Add(name, value)
 			} else if len(ts) > 1 && ts[1] != "omitempty" {
 				values.Add(name, value)
