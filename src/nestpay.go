@@ -81,7 +81,9 @@ type Request struct {
 	IPAddress     string    `xml:"IPAddress,omitempty" form:"clientip,omitempty"`
 	Email         string    `xml:"Email,omitempty"`
 	Mode          string    `xml:"Mode,omitempty"`
+	CardType      string    `xml:",omitempty" form:"cardtype,omitempty"`
 	StoreType     string    `xml:",omitempty" form:"storetype,omitempty"`
+	StoreKey      string    `xml:",omitempty" form:"storekey,omitempty"`
 	Type          string    `xml:"Type,omitempty" form:"TranType,omitempty"`
 	CardNumber    string    `xml:"Number,omitempty" form:"pan,omitempty"`
 	CardMonth     string    `xml:",omitempty" form:"Ecom_Payment_Card_ExpDate_Month,omitempty"`
@@ -91,7 +93,7 @@ type Request struct {
 	Total         string    `xml:"Total,omitempty" form:"amount,omitempty"`
 	Currency      string    `xml:"Currency,omitempty" form:"currency,omitempty"`
 	Installment   string    `xml:"Instalment,omitempty" form:"Instalment,omitempty"`
-	Taksit        string    `xml:",omitempty" form:"taksit,omitempty"`
+	Taksit        string    `xml:"Taksit,omitempty" form:"Taksit,omitempty"`
 	XID           string    `xml:"PayerTxnId,omitempty"`
 	ECI           string    `xml:"PayerSecurityLevel,omitempty"`
 	CAVV          string    `xml:"PayerAuthenticationCode,omitempty"`
@@ -106,6 +108,7 @@ type Request struct {
 	OkUrl         string    `xml:",omitempty" form:"okUrl,omitempty"`
 	FailUrl       string    `xml:",omitempty" form:"failUrl,omitempty"`
 	Lang          string    `xml:"lang,omitempty" form:"lang,omitempty"`
+	Encoding      string    `xml:"encoding,omitempty" form:"encoding,omitempty"`
 	VersionInfo   string    `xml:"VersionInfo,omitempty"`
 }
 
@@ -287,6 +290,10 @@ func (request *Request) SetAmount(total string, currency string) {
 	request.Currency = CurrencyCode[currency]
 }
 
+func (request *Request) SetCurrency(currency string) {
+	request.Currency = CurrencyCode[currency]
+}
+
 func (request *Request) SetInstallment(ins string) {
 	request.Installment = ins
 }
@@ -330,7 +337,7 @@ func (api *API) PreAuth3Dhtml(ctx context.Context, req *Request) (string, error)
 	if err == nil {
 		keys := []string{}
 		for k := range form {
-			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
+			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" && (strings.ToLower(k) != "storekey" || api.Bank == "halkbank") {
 				keys = append(keys, k)
 			}
 		}
@@ -349,7 +356,7 @@ func (api *API) Auth3Dhtml(ctx context.Context, req *Request) (string, error) {
 	if err == nil {
 		keys := []string{}
 		for k := range form {
-			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" {
+			if strings.ToLower(k) != "hash" && strings.ToLower(k) != "encoding" && (strings.ToLower(k) != "storekey" || api.Bank == "halkbank") {
 				keys = append(keys, k)
 			}
 		}
@@ -402,9 +409,8 @@ func (api *API) Transaction(ctx context.Context, req *Request) (res Response, er
 		default:
 			return res, errors.New(res.ErrMsg)
 		}
-	} else {
-		return res, errors.New(res.ErrMsg)
 	}
+	return res, errors.New(res.ErrMsg)
 }
 
 func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, err error) {
@@ -422,14 +428,13 @@ func (api *API) Transaction3D(ctx context.Context, req *Request) (res string, er
 	html = append(html, `<html>`)
 	html = append(html, `<head>`)
 	html = append(html, `<meta http-equiv="Content-Type" content="text/html; charset=utf-8">`)
-	html = append(html, `<script type="text/javascript">function submitonload() {document.payment.submit();document.getElementById('button').remove();document.getElementById('body').insertAdjacentHTML("beforeend", "Lütfen bekleyiniz...");}</script>`)
+	html = append(html, `<script type="text/javascript">function submitonload() {document.payment.submit();document.getElementById('button').remove();document.getElementById('body').innerHTML = '<div class="loading"><p>Lütfen bekleyiniz...</p></div>';}</script>`)
 	html = append(html, `</head>`)
 	html = append(html, `<body onload="javascript:submitonload();" id="body" style="text-align:center;margin:10px;font-family:Arial;font-weight:bold;">`)
 	html = append(html, `<form action="`+EndPoints[api.Bank+"3D"]+`" method="post" name="payment">`)
 	for _, k := range keys {
 		html = append(html, `<input type="hidden" name="`+k+`" value="`+payload.Get(k)+`">`)
 	}
-	html = append(html, `<input type="hidden" name="encoding" value="UTF-8">`)
 	html = append(html, `<input type="submit" value="Gönder" id="button">`)
 	html = append(html, `</form>`)
 	html = append(html, `</body>`)
